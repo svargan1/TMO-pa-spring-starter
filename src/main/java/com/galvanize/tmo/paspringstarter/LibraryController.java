@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class LibraryController {
@@ -18,11 +19,12 @@ public class LibraryController {
     private BookService bookService;
 
     @RequestMapping("api/books")
-    public List<Book> getAllBooks() {
+    public Map<String, List<Book>> getAllBooks() {
         return bookService.getAllBooks();
     }
 
     @RequestMapping(method= RequestMethod.POST, value= "api/books")
+    @ResponseStatus(value = HttpStatus.CREATED)
     public Book addBook(@RequestBody Book book) {
         return bookService.addBook(book);
     }
